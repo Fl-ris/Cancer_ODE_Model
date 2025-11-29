@@ -282,16 +282,62 @@ class tumorODE:
             print("Onbekende solver.... probeer: 'Euler', 'Heun' of 'Runge-Kutta'.")
 
         return t_list, v_list
+    
+    def compute_curve(self,a, b, y0):
+
+        def ODE(t, y):
+            return a * y + b
+        
+        t, y = 0.0, y0
+        ts, ys = [t], [y]
+        for _ in range(self.n):
+            # Eerste update
+            dydt1 = ODE(t, y)
+            t1 = t + 0.5 * self.delta_t
+            y1 = y + 0.5 * dydt1 * self.delta_t
+            # Tweede update
+            dydt2 = ODE(t1, y1)
+            t2 = t + 0.5 * self.delta_t
+            y2 = y + 0.5 * dydt2 * self.delta_t
+            # Derde update
+            dydt3 = ODE(t2, y2)
+            t3 = t + self.delta_t
+            y3 = y + dydt2 * self.delta_t
+            # Vierde update volgens Runge-Kutta
+            dydt4 = ODE(t3, y3)
+            t = t + self.delta_t
+            y = y + (dydt1 + 2.0 * dydt2 + 2.0 * dydt3 + dydt4) / 6.0 * self.delta_t
+            # Bewaar tussenresultaten
+            ts.append(t)
+            ys.append(y) 
+        return ts, ys
+
+
+    # To-do: verder afmaken...
+    def MSE(self,a, b, y0):
+        _, ys_b = self.compute_curve(a, b, y0)
+        sum_squared_error = 0.0
+        for y_exact, y_model in zip(ys_a, ys_b):
+            error = y_exact - y_model
+            sum_squared_error += error * error
+        mean_squared_error = sum_squared_error / len(ys_b)
+        return mean_squared_error
+
 
     def plot(Ts, Vs, color, label):
         """
         Geef de lijst met tijdspunten en volume waarden die daar bijhoren om een grafiek te krijgen die deze plot. 
         """
-        
-        plt.figure(figsize=(12.8, 4.8))
-        plt.axvline(0.0, color=color)
-        plt.plot(Ts, Vs, label=label)
-        plt.legend()
+        plt.plot(Ts, Vs, color=color, label=label)
+
+
+    def show_plot():
+        """
+        Weergeef de grafieken in een enkel venster:
+        """
+        plt.gcf().set_size_inches(12.8, 4.8)
+        plt.axvline(0.0, color='k')
         plt.xlabel("Tijd")
         plt.ylabel("Volume")
+        plt.legend()
         plt.show()
