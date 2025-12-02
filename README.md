@@ -37,7 +37,7 @@ beschrijft.
 $$
 \frac{dV}{dt} = c \cdot V
 $$
-Een exponentiële groeifunctie beschrijft een groei waarbij de snelheid evenredig is met het huidige volume. 
+Een exponentiële groeifunctie beschrijft een groei waarbij de snelheid evenredig is met het huidige volume; hoe groter de tumor wordt, des te sneller hij groeit. 
 De groeisnelheid $c$ neemt dus toe met toenemend volume $V$.
 
 **Toepassing bij tumorgroei:**
@@ -59,7 +59,8 @@ $$
 $$
 Een Mendelsohn model generaliseert exponentiële groei door een exponent $d$ toe te voegen. De waarde van deze exponent, 
  $d$, is vaak gerelateerd aan de geometrie van de groei en kan verschillende waarden aannemen, afhankelijk van het 
-specifieke model of de fase van tumorgroei.
+specifieke model of de fase van tumorgroei. Dit model stelt dat de groeisnelheid evenredig is met het volume tot een bepaalde macht, wat vaak resulteert in een groei die sneller is dan lineair, maar trager is dan exponentieel.
+
 **Toepassing bij tumorgroei:**
 kan de snelheid van tumorgroei realistisch aanpassen afhankelijk van de tumoromstandigheden.
 
@@ -73,7 +74,8 @@ kan de snelheid van tumorgroei realistisch aanpassen afhankelijk van de tumoroms
 $$
 \frac{dV}{dt} = c \cdot (V_{\max} - V)
 $$
-Bij het exponentieel afvlakkend model vertraagt de groei naarmate het volume dichter bij $V_{\max}$ komt.
+Bij het exponentieel afvlakkend model vertraagt de groei naarmate het volume dichter bij $V_{\max}$ komt. Bij dit model is de groeisnelheid evenredig met de resterende ruimte tot het maximum, de groei is in het begin het snelst en neemt continu af naarmate het volume het limiet nadert.
+
 **Toepassing bij tumorgroei:**
 Geschikt om verzadiging en limieten in tumorvolume te modelleren. 
 
@@ -87,10 +89,10 @@ Geschikt om verzadiging en limieten in tumorvolume te modelleren.
 $$
 \frac{dV}{dt} = c \cdot V \cdot (V_{\max} - V)
 $$
-Beschrijft snelle initiële groei die afvlakt naarmate het volume $V_{\max}$ nadert.  
+Beschrijft snelle initiële groei die afvlakt naarmate het volume $V_{\max}$ nadert. 
 
 **Toepassing bij tumorgroei:** 
-veel gebruikt om tumoren te modelleren die een draagcapaciteit hebben.  
+veel gebruikt om tumoren te modelleren die een draagcapaciteit hebben. Dit model beschrijft een S-curve: de tumor groeit initieel exponentieel, maar vertraagt lineair naarmate het volume de maximale hoeveelheid nadert door beperkte ruimte of voedingsstoffen.   
 
 **Voordelen / pluspunten:**  
 - Realistisch initieel exponentiële groei gevolgd door afvlakking.  
@@ -102,7 +104,7 @@ veel gebruikt om tumoren te modelleren die een draagcapaciteit hebben.
 $$
 \frac{dV}{dt} = c \cdot V \cdot (V_{\max}^d - V^d)
 $$
-Breidt het logistische model uit met een exponent $d$ voor flexibeler afvlakgedrag.  
+Breidt het logistische model uit met een exponent $d$ voor flexibeler afvlakgedrag. Dit is een algemene vorm van het logistische en Gompertz-model, waarbij een extra parameter wordt toegevoegd om de vorm van de curve en het punt waarop de vertraging optreedt flexibeler te beschrijven.  
 
 **Toepassing bij tumorgroei:** 
 geschikt wanneer het afvlakken van groei niet lineair verloopt.  
@@ -118,10 +120,10 @@ geschikt wanneer het afvlakken van groei niet lineair verloopt.
 $$
 \frac{dV}{dt} = c \cdot (V - V_{\min}) \cdot (V_{\max} - V)
 $$
-Groei start pas boven een minimumvolume $V_{\min}$.  
-
+Groei start pas boven een minimumvolume $V_{\min}$. Dit model houdt rekening met een drempelwaarde. 
+ 
 **Toepassing bij tumorgroei:** 
-nuttig voor tumoren die pas effectief groeien na een kritieke grootte.  
+nuttig voor tumoren die pas effectief groeien na een kritieke grootte. Als de tumorpopulatie te klein is, is de groeisnelheid negatief of nul (de tumor sterft uit), en groei treedt pas op zodra het volume boven deze minimale overlevingsgrens komt.  
 
 **Voordelen / pluspunten:**  
 - Beschrijft minimum effectieve tumoromvang.  
@@ -137,7 +139,7 @@ $$
 De groeisnelheid neemt af bij grotere volumes door de limiet $d$.  
 
 **Toepassing bij tumorgroei:** 
-geschikt voor tumoren met beperkte groeicapaciteit door ruimte of voedingsstoffen.  
+geschikt voor tumoren met beperkte groeicapaciteit door ruimte of voedingsstoffen. Dit model beschrijft vaak tumoren waarvan de groeisnelheid begrensd wordt tot een constant maximum zodra de tumor een bepaalde grootte heeft bereikt. 
 
 **Voordelen / pluspunten:**  
 - Simpele afvlakking ingebouwd.  
@@ -152,8 +154,8 @@ $$
 De groei wordt beperkt door het oppervlak (diffusie van voeding).  
 
 **Toepassing bij tumorgroei:** 
-beschrijft fysiek gelimiteerde groei, realistisch voor grotere tumoren.  
-
+beschrijft fysiek gelimiteerde groei, realistisch voor grotere tumoren. Bij dit model groeien alleen de cellen aan de buitenrand van de tumor waardoor de groeisnelheid evenredig is met de oppervlakte in plaats van het totale volume.
+ 
 **Voordelen / pluspunten:**  
 - Houdt rekening met diffusielimieten.  
 
@@ -167,7 +169,7 @@ $$
 Metabolische verliezen verminderen de groeisnelheid naarmate het volume toeneemt.  
 
 **Toepassing bij tumorgroei:** 
-veel gebruikt in biologische groei-analyse.  
+veel gebruikt in biologische groei-analyse. Dit model wordt ook gebruikt om de groei van individuele organismen te beschrijven.  
 
 **Voordelen / pluspunten:**  
 - Afvlakking door metabolisme meegenomen.  
@@ -179,7 +181,7 @@ veel gebruikt in biologische groei-analyse.
 $$
 \frac{dV}{dt} = c \cdot V \cdot \ln\left(\frac{V_{\max}}{V}\right)
 $$
-Initieel exponentiële groei die afvlakt richting $V_{\max}$.  
+Initieel exponentiële groei die afvlakt richting $V_{\max}$. Vergelijkbaar met logistische groei, maar de afname van de specifieke groeisnelheid verloopt exponentieel.  
 
 **Toepassing bij tumorgroei:** 
 vaak gebruikt voor menselijke tumoren, realistisch verloop van initiële snelle groei tot verzadiging.  
