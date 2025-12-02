@@ -264,7 +264,7 @@ class tumor_growth_models_ode:
         best_params, mse = self.hooke_jeeves(model_func, params, data_ts, data_vs, methode=methode)
         n_data = len(data_vs)
         n_params = len(best_params)
-        aic, aicc, bic = self.information_criteria(mse, n_data, n_params)
+        aic, aicc, bic = self.informatie_criteria(mse, n_data, n_params)
 
         return {
             "params": best_params,
@@ -273,3 +273,4 @@ class tumor_growth_models_ode:
             "AICc": aicc,
             "BIC": bic
         }
+
