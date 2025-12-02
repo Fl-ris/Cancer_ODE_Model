@@ -205,3 +205,7 @@ p53 is een tumorsuppressoreiwit dat betrokken is bij het beschermen van DNA en b
 3. Hamster cellen: https://pmc.ncbi.nlm.nih.gov/articles/PMC146528/
 4. Groeimodellen: https://cdn.hackaday.io/files/8586367343424/From%20the%20Mendelsohn%20model%20to%20the%20Gompertz%20and%20logistic%20growth%20law.pdf
 5. Groeimodellen: https://ascpt.onlinelibrary.wiley.com/doi/10.1002/psp4.12450
+6. Groeimodellen: https://set.kuleuven.be/voorkennis/blik-op-wiskunde/handboekB/explog/groeimodellen
+7. Groeimodellen: https://cdn.hackaday.io/files/8586367343424/From%20the%20Mendelsohn%20model%20to%20the%20Gompertz%20and%20logistic%20growth%20law.pdf
+8. Groeimodellen: https://www.sciencedirect.com/science/article/abs/pii/S0734975024000296
+
