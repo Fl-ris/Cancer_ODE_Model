@@ -1,5 +1,5 @@
 # Het modelleren van tumoren met behulp van ODE's: 
-*auteurs: Florris Meenninga & Manon Barelds*
+
 ## Biologische achtergrond (Tumorgroei)
 
 Tumorgroei beschrijft de toename van het volume of aantal cellen van een tumor
@@ -345,3 +345,8 @@ p53 in Chinese hamster V79 cells is nonfunctional due to mutation [3].
 10. Numerieke integratiemethoden: https://www.albert.io/blog/eulers-method-and-approximating-solutions-ap-calculus-ab-bc-review/#:~:text=Euler's%20Method%20starts%20with%20a,reaching%20the%20region%20of%20interest.
 11. Numerieke integratiemethoden: https://franciscorichter.github.io/files/ode-2025/lecture07.pdf?utm_source=chatgpt.com
 12. Numerieke integratiemethoden: https://andre-massing.github.io/TMA4320_ScientificComputationNotes/chapter_ode/RungeKuttaNuMeODE.html?utm_source=chatgpt.com
+13. MSE: https://www.britannica.com/science/mean-squared-error
+14. Hooke & Jeeves/direct search optimalisatie: https://web.stanford.edu/group/sisl/k12/optimization/MO-unit2-pdfs/2.11minimum3D2hooke-jeeves.pdf
+15. Hooke & Jeeves/direct search optimalisatie: https://deepgram.com/ai-glossary/hooke-jeeves-algorithm
+16. Modelselectie: https://www.math.ru.nl/~landsman/scriptieMT.pdf
+17. Modelselectie: https://www.sciencedirect.com/science/article/abs/pii/S0167947313002776#:~:text=Despite%20their%20broad%20use%20in,to%20select%20the%20simplest%20model.
