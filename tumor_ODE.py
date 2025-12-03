@@ -103,7 +103,7 @@ class tumorODE:
     def mendelsohn_model(self, c, d, methode="rk4"):
         """Dv/Dt = c * V^d"""
         # Anders math domain error..
-        return self._simulate(lambda V, t: c * math.pow(max(1e-9, V), d), methode)
+        return self._simulate(lambda V, t: c * math.pow(max(1e-6, V), d), methode)
 
     def logistisch_model(self, c, V_max, methode="rk4"):
         """Dv/Dt = c * V * (1 - V/Vmax)"""
@@ -265,57 +265,3 @@ class tumorODE:
         plt.legend()
         plt.grid(True, alpha=0.3)
         plt.show()
-
-
-if __name__ == "__main__":
-    
-
-    # Kleine testdataset van: [S.S. Hassan & H.M. Al-Saedi, 2024](https://doi.org/10.1051/bioconf/20249700118)
-    Ts = [0, 13, 20, 32, 42, 55, 65, 75, 85, 88, 95, 98, 107, 115, 120]
-    Vs = [250, 255, 550, 575, 576, 800, 1050, 1250, 1750, 2000, 2550, 2750, 3000, 3500, 4000]
-
-    modeler = tumorODE(volume=Ts[0], delta_t=1, n=120)
-
-    modellen_lijst = [
-        (modeler.lineaire_model, {'c': 10}),
-        (modeler.exponentieel_model, {'c': 0.1}),
-        (modeler.mendelsohn_model, {'c': 0, 'd': 0}),
-        (modeler.logistisch_model, {'c': 0.2, 'V_max': 800}),
-        (modeler.gompertz_model, {'c': 0.2, 'V_max': 800}),
-        (modeler.von_bertalanffy_model, {'c': 0.5, 'd': 0.1}),
-        (modeler.exponentieel_afvlakkend_model, {'c': 0.1, 'V_max': 800}),
-        (modeler.lineair_gelimiteerd_model, {'c': 100, 'd': 500}),
-    ]
-
-    print(f"Model ,MSE ,AIC")
-
-    resultaten = []
-
-    for model_func, start_params in modellen_lijst:
-            res = modeler.fit_and_evaluate(
-                model_func, 
-                start_params, 
-                Ts, 
-                Vs
-            )
-            resultaten.append(res)
-            print(f"{res['model_naam']:<35}, {res['mse']:.2f}, {res['AIC']:.2f}")
-
-    resultaten.sort(key=lambda x: x['AIC'])
-    beste_resultaat = resultaten[0]
-
-
-    print(f"Beste model: {beste_resultaat['model_naam']}")
-    print(f"Optimale parameters: {beste_resultaat['best_params']}")
-    print(f"Beste model: {beste_resultaat['model_naam']}")
-
-    plt.scatter(Ts, Vs, color="black", label="Werkelijke tumordata")
-
-
-    beste_func = beste_resultaat['functie']
-    beste_params = beste_resultaat['best_params']
-    ts, vs = beste_func(**beste_params)
-    
-    modeler.plot(ts, vs, color="red", label=f"Fit: {beste_resultaat['model_naam']}")
-
-    modeler.show_plot()
