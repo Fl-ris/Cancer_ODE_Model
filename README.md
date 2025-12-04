@@ -133,16 +133,19 @@ geschikt wanneer het afvlakken van groei niet lineair verloopt.
 $$
 \frac{dV}{dt} = c \cdot (V - V_{\min}) \cdot (V_{\max} - V)
 $$
-Groei start pas boven een minimumvolume $V_{\min}$. Dit model houdt rekening met een drempelwaarde. 
+De groei bij dit model start pas boven een minimumvolume $V_{\min}$. Ook houdt dit model rekening met een 
+drempelwaarde. 
  
 **Toepassing bij tumorgroei:** 
-nuttig voor tumoren die pas effectief groeien na een kritieke grootte. Als de tumorpopulatie te klein is, is de groeisnelheid negatief of nul (de tumor sterft uit), en groei treedt pas op zodra het volume boven deze minimale overlevingsgrens komt.  
+nuttig voor tumoren die pas effectief groeien na een kritieke grootte. Als de tumorpopulatie te klein is, is de 
+groeisnelheid negatief of nul (de tumor sterft uit) en groei treedt pas op zodra het volume boven deze minimale 
+overlevingsgrens komt.  
 
 **Voordelen / pluspunten:**  
 - Beschrijft minimum effectieve tumoromvang.  
 
 **Beperkingen:**  
-- Vereist parameter $V_{\min}$.   
+- Vereist parameter $V_{\min}$ en $V_{\max}$.   
 
 
 ### **lineair gelimiteerd model**
@@ -152,7 +155,8 @@ $$
 De groeisnelheid neemt af bij grotere volumes door de limiet $d$.  
 
 **Toepassing bij tumorgroei:** 
-geschikt voor tumoren met beperkte groeicapaciteit door ruimte of voedingsstoffen. Dit model beschrijft vaak tumoren waarvan de groeisnelheid begrensd wordt tot een constant maximum zodra de tumor een bepaalde grootte heeft bereikt. 
+geschikt voor tumoren met beperkte groeicapaciteit door ruimte of voedingsstoffen. Dit model beschrijft vaak tumoren 
+waarvan de groeisnelheid begrensd wordt tot een constant maximum zodra de tumor een bepaalde grootte heeft bereikt. 
 
 **Voordelen / pluspunten:**  
 - Simpele afvlakking ingebouwd.  
@@ -164,10 +168,11 @@ geschikt voor tumoren met beperkte groeicapaciteit door ruimte of voedingsstoffe
 $$
 \frac{dV}{dt} = \frac{c \cdot V}{(V + d)^{1/3}}
 $$
-De groei wordt beperkt door het oppervlak (diffusie van voeding).  
+De groei wordt beperkt door het oppervlak (bijvoorbeeld door diffusie van voeding).  
 
 **Toepassing bij tumorgroei:** 
-beschrijft fysiek gelimiteerde groei, realistisch voor grotere tumoren. Bij dit model groeien alleen de cellen aan de buitenrand van de tumor waardoor de groeisnelheid evenredig is met de oppervlakte in plaats van het totale volume.
+beschrijft fysiek gelimiteerde groei, realistisch voor grotere tumoren. Bij dit model groeien alleen de cellen aan de 
+buitenrand van de tumor waardoor de groeisnelheid evenredig is met de oppervlakte in plaats van het totale volume.
  
 **Voordelen / pluspunten:**  
 - Houdt rekening met diffusielimieten.  
@@ -188,8 +193,8 @@ veel gebruikt in biologische groei-analyse. Dit model wordt ook gebruikt om de g
 - Afvlakking door metabolisme meegenomen.  
 
 **Beperkingen:**  
-- Vereist parameters $c$ en $d$. 
-- 
+- Vereist parameters $c$ en $d$.
+
 ### **Gompertz model**
 $$
 \frac{dV}{dt} = c \cdot V \cdot \ln\left(\frac{V_{\max}}{V}\right)
@@ -209,7 +214,7 @@ vaak gebruikt voor menselijke tumoren, realistisch verloop van initiële snelle 
 ## Numerieke integratiemethoden
 
 De groeimodellen (in het kopje "Gebruikte wiskundige modellen en toelichting") kunnen in de meeste gevallen niet 
-analytisch(exact) worden opgelost. Daarom worden numerieke integratiemethoden gebruikt. Een groot voordeel van numerieke
+analytisch (exact) worden opgelost. Daarom worden numerieke integratiemethoden gebruikt. Een groot voordeel van numerieke
 wiskunde is dat een numeriek antwoord verkregen kan worden voor problemen, die geen "analytische" oplossing hebben. Er 
 wordt vaak gebruik gemaakt van een visualizatie om inzicht in het gedrag van de oplossing te verkrijgen. Het maken van
 bijvoorbeeld een grafiek met een numerieke methode is meestal efficiënter dan het evalueren van de analytische oplossing
@@ -228,8 +233,8 @@ helling (afgeleide) een korte stap gemaakt langs de raaklijn om het volgende pun
 schatten.
 
 De Euler-methode is een eerste-orde methode en daardoor relatief onnauwkeurig, vooral bij
-grotere tijdstappen. In dit project wordt zij voornamelijk gebruikt ter vergelijking met
-nauwkeurigere methoden zoals Heun en Runge–Kutta van vierde orde (RK4).
+grotere tijdstappen, wel is het makkelijk te implementeren en te begrijpen. In dit project wordt de Euler-methode 
+voornamelijk gebruikt ter vergelijking met nauwkeurigere methoden zoals Heun en Runge–Kutta van vierde orde (RK4).
 
 ### **Heun-methode**
 
@@ -274,7 +279,9 @@ de experimentele meetwaarden.
 
 De Hooke & Jeeves-methode is een numerieke optimalisatietechniek die wordt gebruikt 
 om parameters van een model te vinden die een bepaalde doelwaarde minimaliseren of 
-maximaliseren, bijvoorbeeld de MSE tussen model en experimentele data.
+maximaliseren, bijvoorbeeld de MSE tussen model en experimentele data. Voor dit project wil je de optimale waarden van 
+de parameters vinden voor je model die het beste resultaat geven tussen je model en je data. Je wilt dus dat de MSE 
+zo klein mogelijk is. Om de beste parameterwaarden te vinden gebruik je de Hooke & Jeeves/direct search optimalisatie.
 
 - Het is een zogenaamde direct search-methode, wat betekent dat er geen 
   analytische afgeleiden nodig zijn van de functie die geoptimaliseerd wordt.  
@@ -293,16 +300,25 @@ Om verschillende tumorgroeimodellen te vergelijken en te beoordelen welk model
 het beste bij de data past, gebruiken we informatiecriteria AIC, AICc en BIC.  
 
 ### **AIC (Akaike Information Criterion)**
+$$ AIC = n * ln(MSE) + 2k$$
+Hierin is $n$ het aantal datapunten waarvoor de fit gemaakt wordt, en $k$ het aantal parameters in het model.
+
 Het Akaike Informatie Criteria is een maat die zowel de nauwkeurigheid van het model als het aantal parameters in 
 rekening brengt. Lagere AIC-waarden wijzen op een beter compromis tussen fit en complexiteit.
 
 ### **AICc (corrected Akaike Information Criterian)** 
+$$ AICc = n * ln(MSE) + \frac {2k *n} {n-k-1}$$
+Hierin is $n$ het aantal datapunten waarvoor de fit gemaakt wordt, en $k$ het aantal parameters in het model.
+
 Het Akaike Inforamtie Criteria coreccted is een aangepaste versie van AIC voor kleine datasets. 
 Deze correctie voorkomt dat modellen met veel parameters onterecht de voorkeur krijgen bij weinig datapunten.
 
 ### **BIC (Bayesian Information Criterion)** 
+$$ BIC = n * ln(MSE) + ln(n) * k$$ 
+Hierin is $n$ het aantal datapunten waarvoor de fit gemaakt wordt, en $k$ het aantal parameters in het model.
+
 Het Bayesian Informatie Criteria is vergelijkbaar met AIC, maar straft complexe modellen sterker af naarmate het 
-aantal datapunten groter is.  
+aantal datapunten groter is.
 
 In dit project helpen deze criteria om objectief te bepalen welk tumorgroeimodel 
 het meest geschikt is voor de beschikbare data, naast het beoordelen via MSE.
