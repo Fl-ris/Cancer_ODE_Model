@@ -1,5 +1,30 @@
 # Het modelleren van tumoren met behulp van ODE's: 
 
+
+## Gebruik van de tumorODE klasse:
+
+Importeer het script met `from tumor_ODE import tumorODE` en instantieer een tumor model:
+`testTumor = tumorODE(volume,delta_t, n)` waarbij volume het startvolume van de tumor is, delta_t de grootte van de tijdsstap en n het aantal tijdstappen dat gamaakt moet worden. 
+Deze instantie beschikt nu over verschillende methoden die gebruikt kunnen worden om de tumor te moddeleren, een volledig overzicht is hieronder gegeven bij "Gebruikte wiskundige modellen en toelichtingen"
+Elk model heeft zijn eigen parameters die meegegeven moeten worden, de formule van elk model staat ook in de docstring van de functie beschreven. 
+Voorbeeld:
+
+```
+testTumor = tumorODE(1,0.1, 100)
+
+Ts,Vs = testTumor.gompertz_model(1,2)
+testTumor.plot(Ts=Ts,Vs=Vs, color="green", label="gompertz_model")
+testTumor.show_plot("gompertz_model")
+
+```
+In het bovenstaande voorbeeld wordt gebruik gemaakt van een gompertz model met c=1 en v_max = 2, vervolgens worden de verkregen Ts en Vs (tijdspunten en bijbehorende volumes) geplot met de .plot() methode, deze accepteert ook een kleur voor de grafiek en een label.
+Er zijn meerdere lijnen van verschillende moddelen in de zelfde grafiek te plaatsen en met de .show_plot() methode worden deze in het zelfde venster met bijbehorende legenda weergeven. Dit zal er uitzien zoals op de onderstaande afbeelding.
+
+![](graph.png)
+
+
+
+
 ## Biologische achtergrond (Tumorgroei)
 
 Tumorgroei beschrijft de toename van het volume of aantal cellen van een tumor
